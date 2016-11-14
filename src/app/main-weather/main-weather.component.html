@@ -1,0 +1,29 @@
+<!--<i class="wi wi-night-sleet"></i>-->
+<!--<div class="row">-->
+  <!--<button class="btn btn-primary btn-lg" (click)="onButtonClickGetWeatherForBerlin()">Get  WeatherData for Berlin</button>-->
+<!--</div>-->
+
+<!--<hr>-->
+
+<div *ngFor="let item of weather">
+  <div class="row jumbotron" *ngIf="checkIfDisplayDay(item)">
+    <h1>{{item.day}}.{{item.month}}.{{item.year}}</h1>
+  </div>
+  <!--<div>-->
+    <div class="row">
+      <div class="col-lg-2">
+        {{ item.hh }}:{{ item.mm }}
+      </div>
+      <div class="col-lg-1">
+    <!--<i class="wi {{item.icon}}" style="font-size: 40px; color: blue;"></i>-->
+        <i class="wi {{item.icon}}" style="font-size: 40px; color: purple;"></i>
+      </div>
+      <div class="col-lg-9">
+        <span class="tag tag-primary">{{ item.minTemperature }}<i class="wi wi-celsius" style="font-size: 20px;"></i></span>
+        <span class="tag tag-warning">{{ item.maxTemperature }}<i class="wi wi-celsius" style="font-size: 20px;"></i></span>
+        {{ item.description }}
+      </div>
+    </div>
+  <hr>
+  <!--</div>-->
+</div>

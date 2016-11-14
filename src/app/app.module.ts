@@ -1,0 +1,35 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
+import { routing } from "./app.routing";
+import { TestComponent } from './test/test.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { MainWeatherComponent } from './main-weather/main-weather.component';
+import { WeatherService } from "./shared/weather.service";
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    FooterComponent,
+    TestComponent,
+    LoginComponent,
+    RegisterComponent,
+    MainWeatherComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    routing
+  ],
+  providers: [WeatherService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

@@ -1,0 +1,28 @@
+<nav class="navbar navbar-dark bg-inverse navbar-static-top">
+  <button class="navbar-toggler hidden-lg-up float-xs-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="true" aria-label="Toggle navigation"></button>
+  <div class="navbar-toggleable-md collapse" id="navbarResponsive">
+    <!--<div class="container">-->
+      <a class="navbar-brand" [routerLink]="['/']">
+        <img src="http://placehold.it/30x30" width="30" height="30"
+             class="d-inline-block align-top" alt="">
+        Title
+      </a>
+
+      <ul class="nav navbar-nav float-lg-right">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/weather']">Weather</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/register']">Register</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/test']">Test</a>
+        </li>
+      </ul>
+    <!--</div>-->
+  </div>
+</nav>
