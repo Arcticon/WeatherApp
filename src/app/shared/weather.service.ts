@@ -19,15 +19,31 @@ export class WeatherService {
     // }
   }
 
-  // addWeatherItem(index: number, item: Weather){
-  //   this.weather[index].push(item);
-  // }
+  emptyWeatherData(){
+    if(this.weather.length > 0){
+      this.weather.splice(0, this.weather.length);
+    }
+  }
 
   addWeatherItem(item: Weather){
     this.weather.push(item);
   }
 
+  getWeatherByCity(city: string): Observable<any>{
+    if(city != "" && city.length > 2){
+      this.emptyWeatherData();
+      return this._http.get('http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&APPID=17686e49eed56c343fe6106c44a232ed&units=metric&lang=de')
+        .map(response => response.json())
+        .catch(error => {
+          console.error(error);
+          return Observable.throw(error.json());
+        });
+    }
+
+  }
+
 	getWeatherForBerlin(): Observable<any>{
+    this.emptyWeatherData();
     return this._http.get('http://api.openweathermap.org/data/2.5/forecast/city?id=2950159&APPID=17686e49eed56c343fe6106c44a232ed&units=metric&lang=de')
       .map(response => response.json())
       .catch(error => {

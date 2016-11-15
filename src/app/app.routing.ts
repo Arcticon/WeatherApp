@@ -13,7 +13,7 @@ const appRoutes: Routes = [
   { path: '', component: TestComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'weather', component: MainWeatherComponent}
+  { path: 'weatherForecast', component: MainWeatherComponent}
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
