@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { WeatherService } from "../shared/weather.service";
 import { Weather } from "../shared/weather.model";
 import {Subject} from "rxjs";
@@ -11,131 +10,88 @@ import {Subject} from "rxjs";
 })
 export class MainWeatherComponent implements OnInit{
 
-  private weather: Weather[] = [];
-
   private search = new Subject<string>();
+  private weather: Weather;
 
-  city: string = "";
-  cityFlag: boolean = false;
-  cityToDisplay: string = "";
-
-  constructor(private weatherService: WeatherService) { }
+  constructor(private weatherService: WeatherService) {
+    this.weather = new Weather();
+  }
 
   ngOnInit(){
-    //this.onButtonClickGetWeatherForBerlin();
     this.search
       .debounceTime(1000)
       .distinctUntilChanged()
       .switchMap((input: string) => this.weatherService.getWeatherByCity(input))
       .subscribe(
         data => {
-          this.handleData(data);
+          this.handleWeatherInput(data);
         }
       );
-    this.weather = this.weatherService.getWeather();
-  }
-
-  checkIfDisplayDay(item: Weather){
-    return item.display;
   }
 
   onSearch(city: string){
     this.search.next(city);
   }
 
-  onButtonClickGetWeatherForBerlin(){
-    this.weatherService.getWeatherForBerlin()
-      .subscribe(
-      data => {
-        this.handleData(data);
+  private handleWeatherInput(data: any){
+    this.weather = new Weather();
+    this.weather.setCity(data.city.name);
+    for(let i = 0; i < data.list.length; i++){
+      let tempDateArr:string[] = data.list[i].dt_txt.split("-");
+      tempDateArr.push(tempDateArr[2].split(" ")[0]);
+      let tempTime = tempDateArr[2].split(" ")[1];
+      tempDateArr.splice(2, 1);
+      let tempDate:string = tempDateArr[2] + "." + tempDateArr[1] + "." + tempDateArr[0];
+      if(this.weather.getWeatherData().length === 0){
+        this.weather.addWeatherData(tempDate);
       }
-    );
-    this.weather = this.weatherService.getWeather();
-  }
-
-  private handleData(data: any){
-    console.log(data);
-    let date: string[];
-    let day: string[];
-    let hh: string[];
-    let mmss: string[];
-    let icon: string;
-    let tmpDay: string;
-    let display: boolean;
-
-    this.cityFlag = true;
-
-    this.cityToDisplay = data.city.name;
-
-    date = data.list[0].dt_txt.split("-");
-    day = date[2].split(" ", 1);
-    tmpDay = day[0];
-    display = true;
-
-    for (let i = 0; i < data.list.length; i++) {
-      date = data.list[i].dt_txt.split("-");
-      day = date[2].split(" ", 1);
-      mmss = date[2].split(":");
-      hh = mmss[0].split(" ");
-
-      if(i > 0){
-        display = !(tmpDay == day[0]);
+      if(tempDate !== this.weather.getWeatherData()[this.weather.getWeatherData().length-1].getDate()){
+        this.weather.addWeatherData(tempDate);
       }
-
-      if(day[0] != tmpDay){
-        tmpDay = day[0];
+      for(let k = 0; k < this.weather.getWeatherData().length; k++){
+        if(tempDate === this.weather.getWeatherData()[k].getDate()){
+          let tmpIcon:string = "";
+          if(data.list[i].weather[0].icon === "01d"){
+            tmpIcon = "wi-night-clear";
+          }else if(data.list[i].weather[0].icon === "01n"){
+            tmpIcon = "wi-night-clear";
+          }else if(data.list[i].weather[0].icon === "02d"){
+            tmpIcon = "wi-day-sunny-overcast";
+          }else if(data.list[i].weather[0].icon === "02n"){
+            tmpIcon = "wi-night-partly-cloudy";
+          }else if(data.list[i].weather[0].icon === "03d"){
+            tmpIcon = "wi-cloudy";
+          }else if(data.list[i].weather[0].icon === "03n"){
+            tmpIcon = "wi-night-cloudy";
+          }else if(data.list[i].weather[0].icon === "04d"){
+            tmpIcon = "wi-cloud";
+          }else if(data.list[i].weather[0].icon === "04n"){
+            tmpIcon = "wi-night-alt-cloudy";
+          }else if(data.list[i].weather[0].icon === "09d"){
+            tmpIcon = "wi-day-showers";
+          }else if(data.list[i].weather[0].icon === "09n"){
+            tmpIcon = "wi-night-showers";
+          }else if(data.list[i].weather[0].icon === "10d"){
+            tmpIcon = "wi-day-rain";
+          }else if(data.list[i].weather[0].icon === "10n"){
+            tmpIcon = "wi-night-rain";
+          }else if(data.list[i].weather[0].icon === "11d"){
+            tmpIcon = "wi-day-thunderstorm";
+          }else if(data.list[i].weather[0].icon === "11n"){
+            tmpIcon = "wi-night-thunderstorm";
+          }else if(data.list[i].weather[0].icon === "13d"){
+            tmpIcon = "wi-day-snow";
+          }else if(data.list[i].weather[0].icon === "13n"){
+            tmpIcon = "wi-night-snow";
+          }else if(data.list[i].weather[0].icon === "50d"){
+            tmpIcon = "wi-day-fog";
+          }else if(data.list[i].weather[0].icon === "50n"){
+            tmpIcon = "wi-night-fog";
+          }
+          this.weather.getWeatherData()[k].addTemperature(tempTime, data.list[i].main.temp_min,
+            data.list[i].main.temp_max, tmpIcon, data.list[i].weather[0].description);
+        }
       }
-
-      if(data.list[i].weather[0].icon === "01d"){
-        icon = "wi-night-clear";
-      }else if(data.list[i].weather[0].icon === "01n"){
-        icon = "wi-night-clear";
-      }else if(data.list[i].weather[0].icon === "02d"){
-        icon = "wi-day-sunny-overcast";
-      }else if(data.list[i].weather[0].icon === "02n"){
-        icon = "wi-night-partly-cloudy";
-      }else if(data.list[i].weather[0].icon === "03d"){
-        icon = "wi-cloudy";
-      }else if(data.list[i].weather[0].icon === "03n"){
-        icon = "wi-night-cloudy";
-      }else if(data.list[i].weather[0].icon === "04d"){
-        icon = "wi-cloud";
-      }else if(data.list[i].weather[0].icon === "04n"){
-        icon = "wi-night-alt-cloudy";
-      }else if(data.list[i].weather[0].icon === "09d"){
-        icon = "wi-day-showers";
-      }else if(data.list[i].weather[0].icon === "09n"){
-        icon = "wi-night-showers";
-      }else if(data.list[i].weather[0].icon === "10d"){
-        icon = "wi-day-rain";
-      }else if(data.list[i].weather[0].icon === "10n"){
-        icon = "wi-night-rain";
-      }else if(data.list[i].weather[0].icon === "11d"){
-        icon = "wi-day-thunderstorm";
-      }else if(data.list[i].weather[0].icon === "11n"){
-        icon = "wi-night-thunderstorm";
-      }else if(data.list[i].weather[0].icon === "13d"){
-        icon = "wi-day-snow";
-      }else if(data.list[i].weather[0].icon === "13n"){
-        icon = "wi-night-snow";
-      }else if(data.list[i].weather[0].icon === "50d"){
-        icon = "wi-day-fog";
-      }else if(data.list[i].weather[0].icon === "50n"){
-        icon = "wi-night-fog";
-      }
-
-      this.weatherService.addWeatherItem(new Weather(data.city.name,
-        data.list[i].main.temp_min,
-        data.list[i].main.temp_max,
-        data.list[i].weather[0].description,
-        day[0],
-        date[1],
-        date[0],
-        hh[1],
-        mmss[1],
-        mmss[2],
-        icon,
-        display));
     }
   }
 
