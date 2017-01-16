@@ -6,7 +6,7 @@ import {Subject} from "rxjs";
 @Component({
   selector: 'app-main-weather',
   templateUrl: './main-weather.component.html',
-  styleUrls: ['./main-weather.component.css']
+  styleUrls: ['./main-weather.component.scss']
 })
 export class MainWeatherComponent implements OnInit{
 
@@ -29,11 +29,11 @@ export class MainWeatherComponent implements OnInit{
       );
   }
 
-  onSearch(city: string){
+  onSearch(city: string): void{
     this.search.next(city);
   }
 
-  private handleWeatherInput(data: any){
+  private handleWeatherInput(data: any): void{
     this.weather = new Weather();
     this.weather.setCity(data.city.name);
     for(let i = 0; i < data.list.length; i++){

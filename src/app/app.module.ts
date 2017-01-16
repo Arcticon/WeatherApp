@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MainWeatherComponent } from './main-weather/main-weather.component';
 import { WeatherService } from "./shared/weather.service";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { WeatherService } from "./shared/weather.service";
     TestComponent,
     LoginComponent,
     RegisterComponent,
-    MainWeatherComponent
+    MainWeatherComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
