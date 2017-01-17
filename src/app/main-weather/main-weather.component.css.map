@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,aAAc;EACZ,gBAAgB,EAAE,OAAO;EACzB,UAAU,EAAE,MAAM;EAClB,MAAM,EAAG,aAAa;EACtB,UAAU,EAAE,eAAe",
+"sources": ["main-weather.component.scss"],
+"names": [],
+"file": "main-weather.component.css"
+}

@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { MainWeatherComponent } from './main-weather/main-weather.component';
 import { WeatherService } from "./shared/weather.service";
 import { HomeComponent } from './home/home.component';
+import { TestnavbarComponent } from './testnavbar/testnavbar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     RegisterComponent,
     MainWeatherComponent,
-    HomeComponent
+    HomeComponent,
+    TestnavbarComponent
   ],
   imports: [
     BrowserModule,
