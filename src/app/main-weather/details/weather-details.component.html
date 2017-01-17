@@ -1,10 +1,16 @@
+<!--<div class="row">-->
+  <!--<div class="text-lg-center">-->
+    <!--<h1>Weather for: <input type="text" placeholder="Enter City" (input)="onSearch(input.value)" required #input></h1>-->
+  <!--</div>-->
+<!--</div>-->
+
 <div class="row">
   <div class="text-lg-center">
-  <h1>Weather for: <input type="text" placeholder="Enter City" (input)="onSearch(input.value)" required #input></h1>
+    <a class="btn btn-lg btn-primary" [routerLink]="['/weatherForecast']">BACK</a>
   </div>
 </div>
 
-<div *ngFor="let item of weather.getWeatherData()">
+<div *ngFor="let item of forecast.getForecastData()">
   <div class="row weather-date">
     <h1>{{ item.date }}</h1>
   </div>

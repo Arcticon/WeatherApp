@@ -1,55 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherService } from "../shared/weather.service";
-import { Weather } from "../shared/weather.model";
-import {Subject} from "rxjs";
+import { WeatherService } from "../../shared/weather.service";
+import { Forecast } from "../../shared/forecast.model";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-main-weather',
-  templateUrl: './main-weather.component.html',
-  styleUrls: ['./main-weather.component.scss']
+  selector: 'app-weather-details',
+  templateUrl: 'weather-details.component.html',
+  styleUrls: ['weather-details.component.scss']
 })
-export class MainWeatherComponent implements OnInit{
+export class WeatherDetailsComponent implements OnInit {
+  private forecast: Forecast;
+  private sub: any;
 
-  private search = new Subject<string>();
-  private weather: Weather;
-
-  constructor(private weatherService: WeatherService) {
-    this.weather = new Weather();
+  constructor(private route: ActivatedRoute, private weatherService: WeatherService) {
+    this.forecast = new Forecast();
   }
 
-  ngOnInit(){
-    this.search
-      .debounceTime(1000)
-      .distinctUntilChanged()
-      .switchMap((input: string) => this.weatherService.getWeatherByCity(input))
-      .subscribe(
-        data => {
-          this.handleWeatherInput(data);
-        }
-      );
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      let cityName = params['cityName'];
+
+      // console.log(this.weatherService.getForecastByCity(cityName));
+
+      this.weatherService.getForecastByCity(cityName).subscribe(data => {
+        this.handleForecastInput(data);
+      });
+
+      // this.handleForecastInput(this.weatherService.getForecastByCity(cityName));
+    });
   }
 
-  onSearch(city: string): void{
-    this.search.next(city);
-  }
-
-  private handleWeatherInput(data: any): void{
-    this.weather = new Weather();
-    this.weather.setCity(data.city.name);
+  private handleForecastInput(data: any): void{
+    this.forecast = new Forecast();
+    this.forecast.setCity(data.city.name);
     for(let i = 0; i < data.list.length; i++){
       let tempDateArr:string[] = data.list[i].dt_txt.split("-");
       tempDateArr.push(tempDateArr[2].split(" ")[0]);
       let tempTime = tempDateArr[2].split(" ")[1];
       tempDateArr.splice(2, 1);
       let tempDate:string = tempDateArr[2] + "." + tempDateArr[1] + "." + tempDateArr[0];
-      if(this.weather.getWeatherData().length === 0){
-        this.weather.addWeatherData(tempDate);
+      if(this.forecast.getForecastData().length === 0){
+        this.forecast.addForecastData(tempDate);
       }
-      if(tempDate !== this.weather.getWeatherData()[this.weather.getWeatherData().length-1].getDate()){
-        this.weather.addWeatherData(tempDate);
+      if(tempDate !== this.forecast.getForecastData()[this.forecast.getForecastData().length-1].getDate()){
+        this.forecast.addForecastData(tempDate);
       }
-      for(let k = 0; k < this.weather.getWeatherData().length; k++){
-        if(tempDate === this.weather.getWeatherData()[k].getDate()){
+      for(let k = 0; k < this.forecast.getForecastData().length; k++){
+        if(tempDate === this.forecast.getForecastData()[k].getDate()){
           let tmpIcon:string = "";
           if(data.list[i].weather[0].icon === "01d"){
             tmpIcon = "wi-night-clear";
@@ -88,7 +85,7 @@ export class MainWeatherComponent implements OnInit{
           }else if(data.list[i].weather[0].icon === "50n"){
             tmpIcon = "wi-night-fog";
           }
-          this.weather.getWeatherData()[k].addTemperature(tempTime, data.list[i].main.temp_min,
+          this.forecast.getForecastData()[k].addTemperature(tempTime, data.list[i].main.temp_min,
             data.list[i].main.temp_max, tmpIcon, data.list[i].weather[0].description);
         }
       }

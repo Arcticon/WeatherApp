@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { WeatherModule } from './main-weather/weather.module';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -10,7 +12,6 @@ import { routing } from "./app.routing";
 import { TestComponent } from './test/test.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { MainWeatherComponent } from './main-weather/main-weather.component';
 import { WeatherService } from "./shared/weather.service";
 import { HomeComponent } from './home/home.component';
 import { TestnavbarComponent } from './testnavbar/testnavbar.component';
@@ -23,7 +24,6 @@ import { TestnavbarComponent } from './testnavbar/testnavbar.component';
     TestComponent,
     LoginComponent,
     RegisterComponent,
-    MainWeatherComponent,
     HomeComponent,
     TestnavbarComponent
   ],
@@ -31,7 +31,8 @@ import { TestnavbarComponent } from './testnavbar/testnavbar.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    WeatherModule
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]
