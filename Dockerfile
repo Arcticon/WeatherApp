@@ -1,23 +1,19 @@
-# Create image based on the official Node 7 image from dockerhub
-FROM node:7
+FROM nginx
+MAINTAINER Maximilian Kramp
 
-# Create a directory where our app will be placed
-RUN mkdir -p /usr/src/app
+COPY weather-app /usr/share/nginx/html
 
-# Change directory so that our commands run inside this new directory
-WORKDIR /usr/src/app
+#Setup ENV values
+#ENV DOMAIN_NAME "test.cherryfish.com"
+ENV SERVICE_TAGS "nginx,portal"
+ENV SERVICE_80_CHECK_HTTP "/"
 
-# Copy dependency definitions
-COPY package.json /usr/src/app
+#Fix permissions
+RUN chown -R nginx:nginx /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
+# RUN npm install
 
-# Install dependecies
-RUN npm install
 
-# Get all the code needed to run the app
-COPY . /usr/src/app
+EXPOSE 80 443
 
-# Expose the port the app runs in
-EXPOSE 4200
-
-# Serve the app
-CMD ["npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]
