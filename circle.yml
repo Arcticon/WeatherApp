@@ -16,9 +16,9 @@ dependencies:
     - npm install --save
   override:
     - docker info
-    - docker build --rm=false -t weather-app .
+    - docker build --rm=false -t weatherapp .
 
 test:
   override:
-    - docker run -d -p 80:80 -p 443:443 weather-app; sleep 5
+    - docker run -d -p 80:80 -p 443:443 weatherapp; sleep 5
     - curl --retry 10 -v http://localhost
