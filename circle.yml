@@ -1,8 +1,8 @@
 machine:
   node:
     version: 7.1.0
-  #services:
-  #  - docker
+  services:
+    - docker
 
 checkout:
   post:
