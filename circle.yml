@@ -1,0 +1,20 @@
+machine:
+  node:
+    version: 7.1.0
+  #services:
+  #  - docker
+
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
+  #  - cd frontend && npm install
+
+dependencies:
+  pre:
+    - npm install angular-cli@latest -g
+    - npm install --save
+
+test:
+  override:
+    - npm test
