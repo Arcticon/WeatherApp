@@ -8,17 +8,18 @@ checkout:
   post:
     - git submodule sync
     - git submodule update --init
-  #  - cd frontend && npm install
+    - cd weatherApp
 
 dependencies:
   pre:
     - npm install angular-cli@latest -g
     - npm install --save
+    - ng build --dev
   override:
     - docker info
     - docker build --rm=false -t weatherapp .
 
 test:
   override:
-    - docker run -d -p 80:80 -p 443:443 weatherapp; sleep 5
+    - docker run -d -p 80:80 -p 443:443 weatherApp; sleep 5
     - curl --retry 10 -v http://localhost

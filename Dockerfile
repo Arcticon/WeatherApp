@@ -1,7 +1,7 @@
 FROM nginx
 MAINTAINER Maximilian Kramp
 
-COPY weatherapp /usr/share/nginx/html
+COPY weatherApp/dist /usr/share/nginx/html
 
 #Setup ENV values
 #ENV DOMAIN_NAME "test.cherryfish.com"
