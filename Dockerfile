@@ -1,7 +1,7 @@
 FROM nginx
 MAINTAINER Maximilian Kramp
 
-COPY rmdir dist /usr/share/nginx/html
+COPY dist /usr/share/nginx/html
 
 #Setup ENV values
 #ENV DOMAIN_NAME "test.cherryfish.com"
