@@ -20,7 +20,7 @@
       "styles": [
         "../node_modules/tether/dist/css/tether.css",
         "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/weather-icons/css/weather-icons.css",
+        "../node_modules/weathericons/css/weather-icons.css",
         "../node_modules/font-awesome/css/font-awesome.css",
         "styles.scss"
       ],
