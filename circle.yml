@@ -20,7 +20,7 @@ dependencies:
 
 test:
   override:
-    - docker run -d -p 80:80 -p 443:443 weatherApp; sleep 5
+    - docker run -d -p 80:80 -p 443:443 arcticon/weatherapp; sleep 5
     - curl --retry 10 http://localhost
 
 deployment:
