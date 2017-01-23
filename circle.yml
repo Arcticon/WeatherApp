@@ -16,9 +16,9 @@ dependencies:
     - ng build --dev
   override:
     - docker info
-    - docker build --rm=false -t weatherapp .
+    - docker build --rm=false -t weatherApp .
 
 test:
   override:
     - docker run -d -p 80:80 -p 443:443 weatherApp; sleep 5
-    - curl --retry 10 -v http://localhost
+    - curl --retry 10 http://localhost

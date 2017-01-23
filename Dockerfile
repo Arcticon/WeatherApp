@@ -4,7 +4,7 @@ MAINTAINER Maximilian Kramp
 COPY dist /usr/share/nginx/html
 
 #Setup ENV values
-#ENV DOMAIN_NAME "test.cherryfish.com"
+ENV DOMAIN_NAME "arcticon.de"
 ENV SERVICE_TAGS "nginx,portal"
 ENV SERVICE_80_CHECK_HTTP "/"
 
