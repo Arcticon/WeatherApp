@@ -14,8 +14,10 @@ import { TestComponent }        from './test/test.component';
 import { LoginComponent }       from './login/login.component';
 import { RegisterComponent }    from './register/register.component';
 import { WeatherService }       from "./shared/weather.service";
+import { ApartmentService }     from "./shared/apartment.service";
 import { HomeComponent }        from './home/home.component';
 import { TestnavbarComponent }  from './testnavbar/testnavbar.component';
+import { ApartmentInfoComponent } from './apartment-info/apartment-info.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { TestnavbarComponent }  from './testnavbar/testnavbar.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    TestnavbarComponent
+    TestnavbarComponent,
+    ApartmentInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,10 @@ import { TestnavbarComponent }  from './testnavbar/testnavbar.component';
     WeatherModule,
     TodosModule
   ],
-  providers: [WeatherService],
+  providers: [
+    WeatherService,
+    ApartmentService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

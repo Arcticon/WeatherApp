@@ -1,3 +1,88 @@
+$weather-main-width: 600px;
+$weather-main-height: 300px;
+$weather-left-width: 150px;
+$weather-black-bg-opacity: 0.8;
+
+.weather-main {
+
+  max-width: $weather-main-width;
+  max-height: $weather-main-height;
+  min-height: $weather-main-height;
+  height: $weather-main-height;
+  margin: 25px auto 25px auto;
+  position: relative;
+
+  background-size: $weather-main-width $weather-main-height;
+
+  .weather-mid{
+    color: white;
+
+    .city{
+      margin-left: 20px;
+      text-align: left;
+      font-size: 55px;
+    }
+    .date{
+      margin-left: 20px;
+      font-size: 30px;
+      font-style: italic;
+    }
+  }
+
+  .weather-right {
+    position: absolute;
+    top: 0;
+    margin-left: $weather-main-width - $weather-left-width;
+    background-color: rgba(0,0,0,$weather-black-bg-opacity);
+    height: 100%;
+    width: 150px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+
+    .temperature{
+      position: relative;
+      font-size: 40px;
+    }
+    .icon{
+      position: relative;
+      margin-top: 30px;
+      font-size: 50px;
+      width: 100%;
+    }
+    .description{
+      position: relative;
+      margin-top: 25px;
+      width: 100%;
+    }
+    .details{
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      a{
+        color: white;
+        text-decoration: underline;
+      }
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .test-container {
   display: flex;
   flex-direction: column;

@@ -8,27 +8,30 @@
   </div>
 </div>
 
-<div class="test-container" *ngIf="weather && weather.city !== ''">
-  <div id="weatherCard" class="weatherBox">
-    <div class="details">
-      <div class="temperature">
-        {{ weather.temperature }}
-        <i class="wi wi-celsius" style="font-size: 40px;"></i>
-      </div>
-      <div class="right">
-        <div id="date">
-          {{ weather.date }}
-        </div>
-        <div id="description">
-          {{ weather.description }}
-        </div>
-      </div>
+<div class="weather-main" *ngIf="weather && weather.city !== ''" style="background-image: url('https://s-media-cache-ak0.pinimg.com/originals/bb/8f/00/bb8f00b703d0b48b45aba082c9e9b67a.jpg');">
+  <div class="weather-left">
+  </div>
+  <div class="weather-mid">
+    <div class="city">
+      {{ weather.city }}
     </div>
-    <div id="city">
-      <p>
-        {{ weather.city }}
-        <a [routerLink]="['/weatherForecast/details', weather.city]">more Details</a>
-      </p>
+    <div class="date">
+      {{ weather.date }}
+    </div>
+  </div>
+  <div class="weather-right">
+    <div class="temperature">
+      {{ weather.temperature }}
+      <i class="wi wi-celsius"></i>
+    </div>
+    <div class="icon">
+      <i class="wi {{ weather.icon }}"></i>
+    </div>
+    <div class="description">
+      {{ weather.description }}
+    </div>
+    <div class="details">
+      <a [routerLink]="['/weatherForecast/details', weather.city]">more Details</a>
     </div>
   </div>
 </div>
