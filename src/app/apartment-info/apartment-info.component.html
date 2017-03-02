@@ -1,19 +1,48 @@
+<div class="col-xs-12" style="margin-bottom: 25px;" *ngIf="!isAddVisible">
+  <button class="btn btn-success" (click)="addClicked()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+</div>
+<div class="col-xs-12" style="margin-bottom: 25px;" *ngIf="isAddVisible">
+
+  <form class="form-horizontal" #form="ngForm" novalidate (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label class="col-sm-1 control-label" for="Name">Name:</label>
+      <div class="col-sm-4">
+        <input class="form-control" type="text" name="name" id="Name" [(ngModel)]="newApartmentItem.Name" required
+               minlength="3">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-1 control-label" for="Price">Price:</label>
+      <div class="col-sm-4">
+        <input class="form-control" type="number" name="Price" id="Price" [(ngModel)]="newApartmentItem.Price" required>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <button class="btn btn-success"
+            (click)="createNewApartmentItem()"><i class="fa fa-check" aria-hidden="true"></i></button>
+    <button class="btn btn-danger" (click)="resetClicked()"><i class="fa fa-remove" aria-hidden="true"></i></button>
+  </div>
+</div>
 <div class="col-xs-6">
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Preis in €</th>
           <th>Name</th>
-          <th>Gekauft</th>
+          <th>Preis in €</th>
+          <th>Aktionen</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of apartmentItems">
-          <td scope="row">{{item.Price}}</td>
-          <td>{{item.Name}}</td>
+          <td scope="row">{{item.Name}}</td>
+          <td>{{item.Price}}</td>
           <td><button class="btn btn-info"
-                      (click)="updateApartmentItemBought(item)"><i class="fa fa-check" aria-hidden="true"></i></button></td>
+                      (click)="setApartmentItemBought(item)"><i class="fa fa-check" aria-hidden="true"></i></button>
+            <button class="btn btn-danger"
+                      (click)="deleteApartmentItem(item)"><i class="fa fa-remove" aria-hidden="true"></i></button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -30,12 +59,15 @@
         <tr>
           <th>Preis in €</th>
           <th>Name</th>
+          <th>Entfernen</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of apartmentItemsBought">
           <td scope="row">{{item.Price}}</td>
           <td>{{item.Name}}</td>
+          <td><button class="btn btn-danger" (click)="removeApartmentItemBought(item)"><i class="fa fa-remove"
+                                                                                     aria-hidden="true"></i></button></td>
         </tr>
       </tbody>
     </table>
