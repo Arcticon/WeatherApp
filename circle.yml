@@ -12,7 +12,7 @@ checkout:
 dependencies:
   pre:
     - npm install -g @angular/cli@latest --save
-      npm install --save
+    - npm install --save
     - ng build --dev
   override:
     - docker info
