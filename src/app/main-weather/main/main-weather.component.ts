@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherService } from "../../shared/weather.service";
-import { Weather } from "../../shared/weather.model";
+import { WeatherService } from "../../shared/weather/weather.service";
+import { Weather } from "../../shared/weather/weather.model";
 import {Subject} from "rxjs";
 import clock = jasmine.clock;
 

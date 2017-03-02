@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherService } from "../../shared/weather.service";
-import { Forecast } from "../../shared/forecast.model";
+import { WeatherService } from "../../shared/weather/weather.service";
+import { Forecast } from "../../shared/weather/forecast.model";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

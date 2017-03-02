@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodosComponent } from './todos.component';
 import { DetailsComponent } from './details/details.component';
-import {TodosService} from "../shared/todos.service";
+import {TodosService} from "../shared/todo/todos.service";
 
 @NgModule({
   imports: [
