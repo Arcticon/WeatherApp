@@ -18,6 +18,8 @@ import { ApartmentService }     from "./shared/apartment/apartment.service";
 import { HomeComponent }        from './home/home.component';
 import { TestnavbarComponent }  from './testnavbar/testnavbar.component';
 import { ApartmentInfoComponent } from './apartment-info/apartment-info.component';
+import { AuthService } from './shared/auth/auth.service';
+import { UserService } from './shared/user/user.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ApartmentInfoComponent } from './apartment-info/apartment-info.componen
   ],
   providers: [
     WeatherService,
-    ApartmentService
+    ApartmentService,
+    AuthService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

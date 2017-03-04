@@ -7,6 +7,7 @@ export const environment = {
   production: false,
   APP_ID: "17686e49eed56c343fe6106c44a232ed",
   backendURL: "http://arcticon.de:1337/",
+  // backendURL: "http://localhost:1337/",
   backendURLApartment: "apartment",
   backendURLLogin: "login",
   backendURLLogout: "logout",

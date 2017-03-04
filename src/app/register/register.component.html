@@ -1,3 +1,26 @@
-<p>
-  register works!
-</p>
+<div class="container">
+  <form class="form-horizontal" #form="ngForm" novalidate (ngSubmit)="onSubmit()">
+    <div class="form-group row" [ngClass]="{'has-error': loginError }">
+      <label class="col-sm-2 offset-sm-2 control-label" for="Username">Benutzername:</label>
+      <div class="col-sm-4">
+        <input class="form-control" type="text" name="name" id="Username" [(ngModel)]="user.Username" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 offset-sm-2 control-label" for="Email">Email:</label>
+      <div class="col-sm-4">
+        <input class="form-control" type="text" name="name" id="Email" [(ngModel)]="user.Email" required>
+      </div>
+    </div>
+    <div class="form-group row" [ngClass]="{' has-error': loginError }">
+      <label class="col-sm-2 offset-sm-2 control-label" for="Password">Passwort:</label>
+      <div class="col-sm-4">
+        <input class="form-control" type="password" name="password" id="Password" [(ngModel)]="user.Password" required>
+      </div>
+    </div>
+    <!--<div class="col-sm-12" style="width: 100%; margin: auto;">-->
+      <button type="submit" class="btn btn-info btn-lg">Register</button>
+    <!--</div>-->
+
+  </form>
+</div>
