@@ -20,6 +20,7 @@ import { TestnavbarComponent }  from './testnavbar/testnavbar.component';
 import { ApartmentInfoComponent } from './apartment-info/apartment-info.component';
 import { AuthService } from './shared/auth/auth.service';
 import { UserService } from './shared/user/user.service';
+import {isLoggedIn} from "./shared/canActivates/isLoggedIn";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { UserService } from './shared/user/user.service';
     WeatherService,
     ApartmentService,
     AuthService,
-    UserService
+    UserService,
+    isLoggedIn
   ],
   bootstrap: [AppComponent]
 })
