@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.subscriptions.push(this.authService.login(this.user).subscribe(
       (data) => {
         localStorage.setItem("token", data.token);
-        this.authService.setLoggedInUser(true);
+        this.authService.setLoggedInUserBoolean(true);
         this.router.navigate(['/']);
       },
       (error:Response) => console.error(error)

@@ -9,10 +9,12 @@ import { User } from '../user/user.model';
 export class AuthService {
 
   private loggedIn:Subject<boolean> = new Subject<boolean>();
+  private loggedInUser:Subject<User> = new Subject<User>();
   private loggedInBoolean:boolean;
 
   constructor(private http: Http, private router:Router) {
     this.loggedIn.next(!!localStorage.getItem("token"));
+    this.loggedInUser.next(new User());
     this.loggedInBoolean = !!localStorage.getItem("token");
   }
 
@@ -27,10 +29,13 @@ export class AuthService {
         });
   }
 
-  logout(user:User){
+  logout(){
     localStorage.clear();
+    this.loggedIn.next(!!localStorage.getItem("token"));
+    this.loggedInBoolean = !!localStorage.getItem("token");
+    this.loggedInUser.next(new User());
     let headers = new Headers({'Content-Type': 'application/json'});
-    this.http.post(environment.backendURL + environment.backendURLLogout, JSON.stringify(user), {headers: headers})
+    this.http.post(environment.backendURL + environment.backendURLLogout, {headers: headers})
       .map(response => response.json())
       .catch(error => {
         console.error(error);
@@ -43,15 +48,23 @@ export class AuthService {
     return localStorage.getItem("token");
   }
 
-  get isLoggedIn():Observable<any>{
+  get isLoggedIn():Observable<any> {
     return this.loggedIn.asObservable();
+  }
+
+  getLoggedInUser(){
+    return this.loggedInUser.asObservable();
+  }
+
+  setLoggedInUser(user:User){
+    this.loggedInUser.next(user);
   }
 
   isLoggedInBoolean():boolean{
     return this.loggedInBoolean;
   }
 
-  setLoggedInUser(val:boolean){
+  setLoggedInUserBoolean(val:boolean){
     this.loggedIn.next(val);
     this.loggedInBoolean = val;
   }

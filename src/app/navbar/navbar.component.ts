@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthService} from "../shared/auth/auth.service";
 import {Subscription} from "rxjs";
 import {Response} from "@angular/http";
+import {User} from "../shared/user/user.model";
 
 @Component({
   selector: 'app-navbar',
@@ -30,6 +31,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
       (data:boolean) => this.isLoggedIn = data,
       (err:Response) => console.error(err)
     ));
+  }
+
+  private logout(){
+    this.authService.logout();
   }
 
 }
