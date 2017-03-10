@@ -2,7 +2,6 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthService} from "../shared/auth/auth.service";
 import {Subscription} from "rxjs";
 import {Response} from "@angular/http";
-import {User} from "../shared/user/user.model";
 
 @Component({
   selector: 'app-navbar',
@@ -11,26 +10,27 @@ import {User} from "../shared/user/user.model";
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService) {
+  }
 
   private subscriptions: Array<Subscription> = [];
-  private isLoggedIn:boolean;
+  private isLoggedIn:boolean = false;
 
   ngOnInit() {
-    this.getIsLoggedIn();
+    // this.isLoggedIn = !!localStorage.getItem("token");
+    this.subscriptions.push(this.authService.isLoggedIn().subscribe(
+      (data) => {
+        console.log(data);
+        this.isLoggedIn = data;
+      },
+      (err:Response) => console.error(err)
+    ));
   }
 
   ngOnDestroy(){
     for(let i = 0; i < this.subscriptions.length; i++){
       this.subscriptions[i].unsubscribe();
     }
-  }
-
-  private getIsLoggedIn(){
-    this.subscriptions.push(this.authService.isLoggedIn.subscribe(
-      (data:boolean) => this.isLoggedIn = data,
-      (err:Response) => console.error(err)
-    ));
   }
 
   private logout(){

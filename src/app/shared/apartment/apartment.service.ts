@@ -12,7 +12,7 @@ export class ApartmentService {
 
   getApartmentItems():Observable<ApartmentItem[]>{
     let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', this.authService.getToken);
+    headers.append('Authorization', this.authService.getToken());
     return this.http.get(environment.backendURL + environment.backendURLApartment, {headers: headers})
       .map(response => response.json())
       .catch(error => {
@@ -23,7 +23,7 @@ export class ApartmentService {
 
   getApartmentItemById(Id:number):Observable<ApartmentItem[]>{
     let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', this.authService.getToken);
+    headers.append('Authorization', this.authService.getToken());
     return this.http.get(environment.backendURL + environment.backendURLApartment + "/" + Id, {headers: headers})
       .map(response => response.json())
       .catch(error => {
@@ -34,7 +34,7 @@ export class ApartmentService {
 
   addApartmentItem(item:ApartmentItem):Observable<ApartmentItem>{
     let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', this.authService.getToken);
+    headers.append('Authorization', this.authService.getToken());
     return this.http.post(environment.backendURL + environment.backendURLApartment, item, {headers: headers})
       .map(response => response.json())
       .catch(error => {
@@ -45,7 +45,7 @@ export class ApartmentService {
 
   updateApartmentItemById(Id:number, item:ApartmentItem):Observable<ApartmentItem>{
     let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', this.authService.getToken);
+    headers.append('Authorization', this.authService.getToken());
     return this.http.put(environment.backendURL + environment.backendURLApartment + "/" + Id, item, {headers: headers})
       .map(response => response.json())
       .catch(error => {
@@ -57,7 +57,7 @@ export class ApartmentService {
   // delete user by id
   deleteApartmentItem(Id:number): Observable<any>{
     let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', this.authService.getToken);
+    headers.append('Authorization', this.authService.getToken());
     return this.http.delete(environment.backendURL + environment.backendURLApartment + "/" + Id, {headers: headers});
   }
 
